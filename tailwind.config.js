@@ -15,6 +15,7 @@ module.exports = {
         primary: {
           bg: "#FFEBD6",
           DEFAULT: "#FF7F2A",
+          card: "#F6F2EE",
         },
       },
     },
