@@ -1,6 +1,6 @@
 import Image from "next/image";
-import AboutMeCard from "../components/about_me_card";
 import MyPic2 from "../../public/assets/mypic2.png";
+import AboutMeCard from "../components/about_me_card";
 
 type Props = {
   className?: string | undefined;

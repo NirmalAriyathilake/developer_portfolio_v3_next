@@ -1,6 +1,6 @@
 import Image from "next/image";
-import SocialButton from "../components/social_button";
 import MyPic from "../../public/assets/mypic.png";
+import SocialButton from "../components/social_button";
 
 type Props = {
   className?: string | undefined;

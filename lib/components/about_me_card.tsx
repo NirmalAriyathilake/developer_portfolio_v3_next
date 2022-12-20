@@ -14,9 +14,9 @@ const AboutMeCard = (props: Props) => {
         props.className
       }
     >
-      <div className="bg-primary "></div>
+      <div className="bg-primary"></div>
       <div className="text-xl font-semibold mb-2">{props.label}</div>
-      <div className="text-xl ">{props.value}</div>
+      <div className="text-xl">{props.value}</div>
     </div>
   );
 };
