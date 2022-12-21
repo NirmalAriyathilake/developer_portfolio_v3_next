@@ -6,7 +6,7 @@ import { db } from "../lib/firebase/initFirebase";
 import AboutSection from "../lib/sections/about_section";
 import FooterSection from "../lib/sections/footer_section";
 import IntroSection from "../lib/sections/intro_section";
-import { IntroSectionData, introSectionDataEmpty } from "./api/models";
+import { IntroSectionData, introSectionDataEmpty } from "../lib/firebase/models";
 
 const Home: NextPage<{ intro: IntroSectionData }> = (props) => {
   console.log("APPLOG : Received Home props : ", props);

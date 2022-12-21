@@ -1,5 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { connectDatabaseEmulator, getDatabase } from "firebase/database";
+import { getApp, initializeApp } from "firebase/app";
+import { connectDatabaseEmulator, Database, getDatabase } from "firebase/database";
+import { getStorage } from "firebase/storage";
 // import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 const clientCredentials = {
@@ -12,15 +13,47 @@ const clientCredentials = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+const EMULATORS_STARTED = "EMULATORS_STARTED";
 
-const app = initializeApp(clientCredentials);
+function createFirebaseApp() {
+  try {
+    return getApp();
+  } catch {
+    const newapp = initializeApp(clientCredentials);
+
+    // initializeAppCheck(newapp, {
+    //   provider: new ReCaptchaV3Provider(
+    //     process.env.NEXT_PUBLIC_FIREBASE_APP_CHECK_SITE_KEY as string
+    //   ),
+
+    //   // Optional argument. If true, the SDK automatically refreshes App Check
+    //   // tokens as needed.
+    //   isTokenAutoRefreshEnabled: true,
+    // });
+
+    console.log("APPLOG : Firebase has been init successfully");
+
+    return newapp;
+  }
+}
+
+const app = createFirebaseApp();
 
 const db = getDatabase(app);
 
-try {
-  if (location.hostname === "localhost") {
-    connectDatabaseEmulator(db, "localhost", 9000);
-  }
-} catch (error) {}
 
-export { db };
+function startEmulators(database: Database) {
+  if (!global[EMULATORS_STARTED]) {
+    global[EMULATORS_STARTED] = true;
+
+    connectDatabaseEmulator(database, "localhost", 9000);
+  }
+}
+
+const storage = getStorage(app);
+
+if (process.env.NODE_ENV === "development") {
+  startEmulators(db);
+}
+
+export { db, storage };

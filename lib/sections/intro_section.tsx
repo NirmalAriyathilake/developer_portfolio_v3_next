@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IntroSectionData } from "../../pages/api/models";
+import { IntroSectionData } from "../firebase/models";
 import MyPic from "../../public/assets/mypic.png";
 import SocialButton from "../components/social_button";
 
