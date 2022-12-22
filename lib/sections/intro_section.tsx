@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { IntroSectionData } from "../firebase/models";
+
 import MyPic from "../../public/assets/mypic.png";
 import SocialButton from "../components/social_button";
+import { IntroSectionData } from "../firebase/models";
 
 type Props = {
   data: IntroSectionData;
@@ -20,7 +21,7 @@ const IntroSection = (props: Props) => {
           </h1>
 
           <div className="text-7xl dash-title font-bold mt-10">
-            I'm {props.data.name}
+            I&apos;m {props.data.name}
           </div>
 
           <h1 className="text-7xl font-semibold mt-10">
@@ -36,7 +37,7 @@ const IntroSection = (props: Props) => {
           </button>
           <div className="flex flex-row mt-10 items-center self-center gap-5">
             {props.data.socialLinks.map((link) => (
-              <SocialButton label={link.label} />
+              <SocialButton label={link.label} key={link.label} />
             ))}
           </div>
         </div>

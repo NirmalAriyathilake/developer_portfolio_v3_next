@@ -1,6 +1,6 @@
 import { getApp, initializeApp } from "firebase/app";
 import { connectDatabaseEmulator, Database, getDatabase } from "firebase/database";
-import { getStorage } from "firebase/storage";
+import { connectStorageEmulator, getStorage } from "firebase/storage";
 // import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 const clientCredentials = {
@@ -47,6 +47,7 @@ function startEmulators(database: Database) {
     global[EMULATORS_STARTED] = true;
 
     connectDatabaseEmulator(database, "localhost", 9000);
+    connectStorageEmulator(storage, "localhost", 9199);
   }
 }
 

@@ -4,7 +4,7 @@ type Props = {
   className?: string | undefined;
 };
 
-const AboutMeCard = (props: Props) => {
+const AboutInfoCard = (props: Props) => {
   console.log("AboutMeCard props : ", props);
 
   return (
@@ -21,4 +21,4 @@ const AboutMeCard = (props: Props) => {
   );
 };
 
-export default AboutMeCard;
+export default AboutInfoCard;
