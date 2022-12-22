@@ -46,7 +46,8 @@ export const getServerSideProps: GetServerSideProps<{
   var about: AboutSectionData = aboutSectionDataEmpty;
 
   const dbRef = databaseRef(db);
-  const pathReference = storageRef(storage, "/mypic2.png");
+  const pathReference = storageRef(storage, "/mypic.png");
+  const pathReference2 = storageRef(storage, "/mypic2.png");
 
   await get(child(dbRef, "/"))
     .then((snapshot) => {
@@ -68,13 +69,22 @@ export const getServerSideProps: GetServerSideProps<{
 
   await getDownloadURL(pathReference)
     .then(async (url) => {
+      intro.imageUrl = url;
+      console.log("APPLOG : Received intro imageUrl : ", url);
+    })
+    .catch((error) => {
+      console.error("APPLOG : Storage intro Error : ", error);
+    });
+
+  await getDownloadURL(pathReference2)
+    .then(async (url) => {
       var { img, base64 } = await getPlaiceholder(url);
       about.image = img;
       about.blurUrl = base64;
-      console.log("APPLOG : Received imageUrl : ", url);
+      console.log("APPLOG : Received about imageUrl : ", url);
     })
     .catch((error) => {
-      console.error("APPLOG : Storage Error : ", error);
+      console.error("APPLOG : Storage about Error : ", error);
     });
 
   return {

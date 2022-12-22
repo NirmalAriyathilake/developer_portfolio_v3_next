@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import MyPic from "../../public/assets/mypic.png";
 import SocialButton from "../components/social_button";
 import { IntroSectionData } from "../firebase/models";
 
@@ -43,7 +42,13 @@ const IntroSection = (props: Props) => {
         </div>
 
         <div className="mt-10 mr-10">
-          <Image src={MyPic} alt="My Pic" priority />
+          <Image
+            src={props.data.imageUrl}
+            alt="My Pic"
+            priority
+            width={720}
+            height={946}
+          />
         </div>
       </div>
     </div>
