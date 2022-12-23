@@ -9,14 +9,21 @@ import {
   introSectionDataEmpty,
 } from "../lib/firebase/emptyObjects";
 import { db, storage } from "../lib/firebase/initFirebase";
-import { AboutSectionData, IntroSectionData } from "../lib/firebase/models";
+import {
+  AboutSectionData,
+  IntroSectionData,
+  ServiceCardData,
+} from "../lib/firebase/models";
 import AboutSection from "../lib/sections/about_section";
 import FooterSection from "../lib/sections/footer_section";
 import IntroSection from "../lib/sections/intro_section";
+import ServicesSection from "../lib/sections/services_section";
 
-const Home: NextPage<{ intro: IntroSectionData; about: AboutSectionData }> = (
-  props
-) => {
+const Home: NextPage<{
+  introData: IntroSectionData;
+  aboutData: AboutSectionData;
+  servicesData: ServiceCardData[];
+}> = (props) => {
   console.log("APPLOG : Received Home props : ", props);
 
   return (
@@ -27,8 +34,9 @@ const Home: NextPage<{ intro: IntroSectionData; about: AboutSectionData }> = (
       </Head>
 
       <main>
-        <IntroSection data={props.intro} />
-        <AboutSection data={props.about} />
+        <IntroSection data={props.introData} />
+        <AboutSection data={props.aboutData} />
+        <ServicesSection data={props.servicesData} />
       </main>
 
       <FooterSection />
@@ -37,25 +45,84 @@ const Home: NextPage<{ intro: IntroSectionData; about: AboutSectionData }> = (
 };
 
 export const getServerSideProps: GetServerSideProps<{
-  intro: IntroSectionData;
-  about: AboutSectionData;
-}> = async (context) => {
+  introData: IntroSectionData;
+  aboutData: AboutSectionData;
+  servicesData: ServiceCardData[];
+}> = async () => {
   console.log("APPLOG : Calling getServerSideProps");
 
-  var intro: IntroSectionData = introSectionDataEmpty;
-  var about: AboutSectionData = aboutSectionDataEmpty;
+  var introData: IntroSectionData = introSectionDataEmpty;
+  var aboutData: AboutSectionData = aboutSectionDataEmpty;
+  var servicesData: ServiceCardData[] = [];
 
   const dbRef = databaseRef(db);
-  const pathReference = storageRef(storage, "/mypic.png");
-  const pathReference2 = storageRef(storage, "/mypic2.png");
 
   await get(child(dbRef, "/"))
-    .then((snapshot) => {
+    .then(async (snapshot) => {
       if (snapshot.exists()) {
         console.log("APPLOG : Received snapshot : ", snapshot.val());
 
-        intro = snapshot.val()["intro"];
-        about = snapshot.val()["about"];
+        introData = snapshot.val()["intro"];
+        aboutData = snapshot.val()["about"];
+        const dbServicesData: ServiceCardData[] = snapshot.val()["services"];
+
+        console.log("APPLOG : Received intro : ", introData);
+        console.log("APPLOG : Received about : ", aboutData);
+        console.log("APPLOG : Received services : ", dbServicesData);
+
+        const pathReference = storageRef(storage, "/mypic.png");
+        const pathReference2 = storageRef(storage, "/mypic2.png");
+
+        await getDownloadURL(pathReference)
+          .then(async (url) => {
+            introData.imageUrl = url;
+            console.log("APPLOG : Updated intro imageUrl : ", url);
+          })
+          .catch((error) => {
+            console.error("APPLOG : Storage intro Error : ", error);
+          });
+
+        await getDownloadURL(pathReference2)
+          .then(async (url) => {
+            var { img, base64 } = await getPlaiceholder(url);
+            aboutData.image = img;
+            aboutData.blurUrl = base64;
+            console.log("APPLOG : Updated about imageUrl : ", url);
+          })
+          .catch((error) => {
+            console.error("APPLOG : Storage about Error : ", error);
+          });
+
+        for (var i = 0; i < dbServicesData.length; i++) {
+          const service = dbServicesData[i];
+
+          console.log("APPLOG : Received services service : ", service);
+
+          const iconPathReference = storageRef(
+            storage,
+            "/" + service.icon + ".png"
+          );
+
+          await getDownloadURL(iconPathReference)
+            .then(async (url) => {
+              var { img, base64 } = await getPlaiceholder(url);
+              service.iconImage = img;
+              service.iconBlurUrl = base64;
+
+              console.log(
+                "APPLOG : Updated service " + service.label + " imageUrl : ",
+                url
+              );
+
+              servicesData.push(service);
+            })
+            .catch((error) => {
+              console.error(
+                "APPLOG : Storage service " + service.label + " Error : ",
+                error
+              );
+            });
+        }
       } else {
         console.log("APPLOG : No data available");
       }
@@ -64,31 +131,16 @@ export const getServerSideProps: GetServerSideProps<{
       console.error("APPLOG : Database Error : ", error);
     });
 
-  console.log("APPLOG : Received intro : ", intro);
-  console.log("APPLOG : Received about : ", about);
-
-  await getDownloadURL(pathReference)
-    .then(async (url) => {
-      intro.imageUrl = url;
-      console.log("APPLOG : Received intro imageUrl : ", url);
-    })
-    .catch((error) => {
-      console.error("APPLOG : Storage intro Error : ", error);
-    });
-
-  await getDownloadURL(pathReference2)
-    .then(async (url) => {
-      var { img, base64 } = await getPlaiceholder(url);
-      about.image = img;
-      about.blurUrl = base64;
-      console.log("APPLOG : Received about imageUrl : ", url);
-    })
-    .catch((error) => {
-      console.error("APPLOG : Storage about Error : ", error);
-    });
+  console.log("APPLOG : Updated intro : ", introData);
+  console.log("APPLOG : Updated about : ", aboutData);
+  console.log("APPLOG : Updated services : ", servicesData);
 
   return {
-    props: { intro, about },
+    props: {
+      introData: introData,
+      aboutData: aboutData,
+      servicesData: servicesData,
+    },
   };
 };
 

@@ -5,7 +5,7 @@ type Props = {
 };
 
 const AboutInfoCard = (props: Props) => {
-  console.log("AboutMeCard props : ", props);
+  console.log("AboutInfoCard props : ", props);
 
   return (
     <div
@@ -14,7 +14,6 @@ const AboutInfoCard = (props: Props) => {
         props.className
       }
     >
-      <div className="bg-primary"></div>
       <div className="text-xl font-semibold mb-2">{props.label}</div>
       <div className="text-xl">{props.value}</div>
     </div>
