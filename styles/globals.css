@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.dash-title {
+  position: relative;
+  margin-left: 70px;
+}
+
 .dash-title::before {
   content: "";
   position: absolute;
@@ -10,14 +15,19 @@
   top: 50%;
   height: 3px;
   width: 45px;
-  background: #ff7f2a;
+  background-color: #ff7f2a;
 }
 
-.dash-title {
+.section-title {
   position: relative;
-  margin-left: 70px;
 }
 
-.service-card-background {
-  background: linear-gradient(0, rgb(246 242 238) 70%, #ffffff 0%);
+.section-title::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #ff7f2a;
 }

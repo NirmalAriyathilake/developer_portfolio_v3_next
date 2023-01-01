@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import AboutInfoCard from "../components/about_info_card";
+import SectionTitle from "../components/section_title";
 import { AboutSectionData } from "../firebase/models";
 
 type Props = {
@@ -13,9 +14,8 @@ const AboutSection = (props: Props) => {
 
   return (
     <div className={props.className}>
-      <div className="flex flex-col w-full justify-start items-start px-10 py-10">
-        {/* <div className="dash-title text-lg">About</div> */}
-        <div className="self-center font-semibold text-2xl">WHO AM I ?</div>
+      <div className="flex flex-col w-full justify-start items-start px-10 py-10 ">
+        <SectionTitle title="WHO AM I ?" />
         <div className="flex flex-row items-center mt-5">
           <div className="mr-10 w-3/5">
             <Image

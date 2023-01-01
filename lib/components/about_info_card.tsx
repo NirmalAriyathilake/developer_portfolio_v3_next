@@ -10,7 +10,7 @@ const AboutInfoCard = (props: Props) => {
   return (
     <div
       className={
-        "px-3 py-3 flex flex-col items-start bg-primary-card border-l-4 border-solid border-primary " +
+        "px-3 py-3 flex flex-col items-start bg-primary-card border-l-4 border-solid border-primary rounded-r-lg " +
         props.className
       }
     >
