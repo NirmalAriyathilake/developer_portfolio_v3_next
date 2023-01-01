@@ -32,7 +32,7 @@ const IntroSection = (props: Props) => {
           </h1>
 
           <div className="flex flex-row gap-5  mt-10">
-            <button className="border-4 border-primary px-10 py-5 font-semibold shadow-xl rounded-lg ">
+            <button className="border-4 border-primary px-10 py-5 font-semibold shadow-xl rounded-lg">
               <div className="text-xl font-semibold">Contact Me</div>
             </button>
             <button className="bg-primary px-10 py-5 font-semibold shadow-2xl rounded-lg">

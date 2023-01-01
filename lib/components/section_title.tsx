@@ -6,7 +6,8 @@ type Props = {
 const SectionTitle = (props: Props) => (
   <div
     className={
-      "self-center font-semibold text-3xl section-title " + props.className
+      "self-center font-semibold text-3xl section-title mb-5 " +
+      props.className
     }
   >
     {props.title}

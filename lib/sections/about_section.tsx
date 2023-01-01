@@ -15,8 +15,8 @@ const AboutSection = (props: Props) => {
   return (
     <div className={props.className}>
       <div className="flex flex-col w-full justify-start items-start px-10 py-10 ">
-        <SectionTitle title="WHO AM I ?" />
-        <div className="flex flex-row items-center mt-5">
+        <SectionTitle title="ABOUT ME" />
+        <div className="flex flex-row items-center">
           <div className="mr-10 w-3/5">
             <Image
               {...props.data.image}
