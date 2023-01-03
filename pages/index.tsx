@@ -11,6 +11,7 @@ import {
 import { db, storage } from "../lib/firebase/initFirebase";
 import {
   AboutSectionData,
+  DownloadedAsset,
   IntroSectionData,
   ProjectData,
   ServiceData,
@@ -26,6 +27,7 @@ const Home: NextPage<{
   aboutData: AboutSectionData;
   servicesData: ServiceData[];
   projectsData: ProjectData[];
+  downloadedAssets: [String, DownloadedAsset][];
 }> = (props) => {
   console.log("APPLOG : Received Home props : ", props);
 
@@ -40,7 +42,10 @@ const Home: NextPage<{
         <IntroSection data={props.introData} />
         <AboutSection data={props.aboutData} />
         <ServicesSection data={props.servicesData} />
-        <ProjectsSection data={props.projectsData}/>
+        <ProjectsSection
+          data={props.projectsData}
+          downloadedAssets={new Map(props.downloadedAssets)}
+        />
       </main>
 
       <FooterSection />
@@ -53,6 +58,7 @@ export const getServerSideProps: GetServerSideProps<{
   aboutData: AboutSectionData;
   servicesData: ServiceData[];
   projectsData: ProjectData[];
+  downloadedAssets: [String, DownloadedAsset][];
 }> = async () => {
   console.log("APPLOG : Calling getServerSideProps");
 
@@ -60,8 +66,39 @@ export const getServerSideProps: GetServerSideProps<{
   var aboutData: AboutSectionData = aboutSectionDataEmpty;
   var servicesData: ServiceData[] = [];
   var projectsData: ProjectData[] = [];
+  let downloadedAssets = new Map<String, DownloadedAsset>();
+
+  let downloadedAssetsNames = [
+    "ButtonAppSite",
+    "ButtonPlaystore",
+    "ButtonWebSite",
+    "FlutterBackdrop",
+    "AndroidBackdrop",
+  ];
 
   const dbRef = databaseRef(db);
+
+  for (let name of downloadedAssetsNames) {
+    const iconPathReference = storageRef(storage, "/" + name + ".png");
+
+    await getDownloadURL(iconPathReference)
+      .then(async (url) => {
+        var { img, base64 } = await getPlaiceholder(url);
+        let downloadedAsset: DownloadedAsset = {
+          image: img,
+          blurUrl: base64,
+          url: url,
+        };
+
+        downloadedAssets.set(name, downloadedAsset);
+      })
+      .catch((error) => {
+        console.error(
+          "APPLOG : Storage asset name " + name + " Error : ",
+          error
+        );
+      });
+  }
 
   await get(child(dbRef, "/"))
     .then(async (snapshot) => {
@@ -182,6 +219,7 @@ export const getServerSideProps: GetServerSideProps<{
       aboutData: aboutData,
       servicesData: servicesData,
       projectsData: projectsData,
+      downloadedAssets: Array.from(downloadedAssets.entries()),
     },
   };
 };

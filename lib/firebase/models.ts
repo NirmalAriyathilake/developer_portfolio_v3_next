@@ -44,6 +44,7 @@ export type ProjectLinkData = {
 
 export type ProjectData = {
   title: string;
+  language: string;
   imageName: string;
   image: any;
   imageBlurUrl: string;
@@ -51,4 +52,10 @@ export type ProjectData = {
   description: string;
   points: ProjectPointData[];
   links: ProjectLinkData[];
+}
+
+export type DownloadedAsset = {
+  image: any;
+  blurUrl: string;
+  url: string;
 }
