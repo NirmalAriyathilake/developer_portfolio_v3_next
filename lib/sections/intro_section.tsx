@@ -31,18 +31,14 @@ const IntroSection = (props: Props) => {
             {props.data.yearsOfExperience}+ years of experience
           </h1>
 
-          <div className="flex flex-row gap-5  mt-10">
-            <button className="border-4 border-primary px-10 py-5 font-semibold shadow-xl rounded-lg">
-              <div className="text-xl font-semibold">Contact Me</div>
-            </button>
-            <button className="bg-primary px-10 py-5 font-semibold shadow-2xl rounded-lg">
-              <div className="text-xl font-semibold">Download CV</div>
-            </button>
+          <div className="flex flex-row gap-5 mt-10">
+            <button className="btn btn-outline btn-primary btn-lg">Contact Me</button>
+            <button className="btn btn-primary btn-lg">Download CV</button>
           </div>
-          
-          <div className="flex flex-row mt-10 items-center self-center gap-5">
+
+          <div className="flex flex-row mt-10 items-center self-center gap-3">
             {props.data.socialLinks.map((link) => (
-              <SocialButton label={link.label} key={link.label} />
+              <SocialButton label={link.label} key={link.label} url={link.url}/>
             ))}
           </div>
         </div>
