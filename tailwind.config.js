@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -20,5 +21,16 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        bumblebee: {
+          ...require("daisyui/src/colors/themes")["[data-theme=bumblebee]"],
+          primary: "#FF7F2A",
+          // "primary-focus": "#FF660A",
+        },
+      },
+    ],
+  },
 };
