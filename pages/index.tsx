@@ -74,6 +74,7 @@ export const getServerSideProps: GetServerSideProps<{
     "ButtonWebSite",
     "FlutterBackdrop",
     "AndroidBackdrop",
+    "SvelteBackdrop",
   ];
 
   const dbRef = databaseRef(db);

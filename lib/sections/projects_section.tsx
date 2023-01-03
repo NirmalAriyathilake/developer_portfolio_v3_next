@@ -15,7 +15,7 @@ const ProjectsSection = (props: Props) => {
     <div className={props.className}>
       <div className="flex flex-col w-full justify-start items-center px-10 py-10">
         <SectionTitle title="MY PROJECTS" />
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-10 mt-5">
           {props.data.map((project) => (
             <ProjectCard
               project={project}
