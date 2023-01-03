@@ -1,9 +1,9 @@
 import SectionTitle from "../components/section_title";
 import ServiceCard from "../components/service_card";
-import { ServiceCardData } from "../firebase/models";
+import { ServiceData } from "../firebase/models";
 
 type Props = {
-  data: ServiceCardData[];
+  data: ServiceData[];
   className?: string | undefined;
 };
 

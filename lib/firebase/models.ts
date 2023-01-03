@@ -1,11 +1,11 @@
 export type AboutSectionData = {
-  infoCards: AboutInfoCardData[];
+  infoCards: AboutInfoData[];
   message: string;
   image: any;
   blurUrl: string;
 };
 
-export type AboutInfoCardData = {
+export type AboutInfoData = {
   label: string;
   value: string;
 };
@@ -23,7 +23,7 @@ export type IntroSocialLinkData = {
   url: string;
 };
 
-export type ServiceCardData = {
+export type ServiceData = {
   label: string;
   description: string;
   icon: string;
@@ -31,3 +31,24 @@ export type ServiceCardData = {
   iconBlurUrl: string;
   seeMorePath: string;
 };
+
+export type ProjectPointData = {
+  label: string;
+  value: string;
+}
+
+export type ProjectLinkData = {
+  type: string;
+  url: string;
+}
+
+export type ProjectData = {
+  title: string;
+  imageName: string;
+  image: any;
+  imageBlurUrl: string;
+  shortDescription: string;
+  description: string;
+  points: ProjectPointData[];
+  links: ProjectLinkData[];
+}

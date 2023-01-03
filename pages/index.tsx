@@ -12,17 +12,20 @@ import { db, storage } from "../lib/firebase/initFirebase";
 import {
   AboutSectionData,
   IntroSectionData,
-  ServiceCardData,
+  ProjectData,
+  ServiceData,
 } from "../lib/firebase/models";
 import AboutSection from "../lib/sections/about_section";
 import FooterSection from "../lib/sections/footer_section";
 import IntroSection from "../lib/sections/intro_section";
+import ProjectsSection from "../lib/sections/projects_section";
 import ServicesSection from "../lib/sections/services_section";
 
 const Home: NextPage<{
   introData: IntroSectionData;
   aboutData: AboutSectionData;
-  servicesData: ServiceCardData[];
+  servicesData: ServiceData[];
+  projectsData: ProjectData[];
 }> = (props) => {
   console.log("APPLOG : Received Home props : ", props);
 
@@ -37,6 +40,7 @@ const Home: NextPage<{
         <IntroSection data={props.introData} />
         <AboutSection data={props.aboutData} />
         <ServicesSection data={props.servicesData} />
+        <ProjectsSection data={props.projectsData}/>
       </main>
 
       <FooterSection />
@@ -47,13 +51,15 @@ const Home: NextPage<{
 export const getServerSideProps: GetServerSideProps<{
   introData: IntroSectionData;
   aboutData: AboutSectionData;
-  servicesData: ServiceCardData[];
+  servicesData: ServiceData[];
+  projectsData: ProjectData[];
 }> = async () => {
   console.log("APPLOG : Calling getServerSideProps");
 
   var introData: IntroSectionData = introSectionDataEmpty;
   var aboutData: AboutSectionData = aboutSectionDataEmpty;
-  var servicesData: ServiceCardData[] = [];
+  var servicesData: ServiceData[] = [];
+  var projectsData: ProjectData[] = [];
 
   const dbRef = databaseRef(db);
 
@@ -64,11 +70,14 @@ export const getServerSideProps: GetServerSideProps<{
 
         introData = snapshot.val()["intro"];
         aboutData = snapshot.val()["about"];
-        const dbServicesData: ServiceCardData[] = snapshot.val()["services"];
+        const dbServicesData: ServiceData[] = snapshot.val()["services"];
+        const dbProjectsData: ProjectData[] =
+          snapshot.val()["featured-projects"];
 
         console.log("APPLOG : Received intro : ", introData);
         console.log("APPLOG : Received about : ", aboutData);
         console.log("APPLOG : Received services : ", dbServicesData);
+        console.log("APPLOG : Received projects : ", dbProjectsData);
 
         const pathReference = storageRef(storage, "/mypic.png");
         const pathReference2 = storageRef(storage, "/mypic2.png");
@@ -123,6 +132,37 @@ export const getServerSideProps: GetServerSideProps<{
               );
             });
         }
+
+        for (var i = 0; i < dbProjectsData.length; i++) {
+          const project = dbProjectsData[i];
+
+          console.log("APPLOG : Received projects project : ", project);
+
+          const iconPathReference = storageRef(
+            storage,
+            "/" + project.imageName + "-project.png"
+          );
+
+          await getDownloadURL(iconPathReference)
+            .then(async (url) => {
+              var { img, base64 } = await getPlaiceholder(url);
+              project.image = img;
+              project.imageBlurUrl = base64;
+
+              console.log(
+                "APPLOG : Updated project " + project.title + " imageUrl : ",
+                url
+              );
+
+              projectsData.push(project);
+            })
+            .catch((error) => {
+              console.error(
+                "APPLOG : Storage project " + project.title + " Error : ",
+                error
+              );
+            });
+        }
       } else {
         console.log("APPLOG : No data available");
       }
@@ -134,12 +174,14 @@ export const getServerSideProps: GetServerSideProps<{
   console.log("APPLOG : Updated intro : ", introData);
   console.log("APPLOG : Updated about : ", aboutData);
   console.log("APPLOG : Updated services : ", servicesData);
+  console.log("APPLOG : Updated projects : ", projectsData);
 
   return {
     props: {
       introData: introData,
       aboutData: aboutData,
       servicesData: servicesData,
+      projectsData: projectsData,
     },
   };
 };
