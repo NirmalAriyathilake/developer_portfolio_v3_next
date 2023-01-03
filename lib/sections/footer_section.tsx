@@ -11,15 +11,7 @@ const FooterSection = (props: Props) => (
       props.className
     }
   >
-    <a
-      className="flex items-center justify-center gap-2"
-      href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Powered by{" "}
-      <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-    </a>
+    Powered by <Image src="/logo_footer.png" alt="Logo" className="mx-5" width={121} height={16} />
   </footer>
 );
 
