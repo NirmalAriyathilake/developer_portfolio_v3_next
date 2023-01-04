@@ -1,5 +1,4 @@
-import SectionTitle from "../components/section_title";
-import ServiceCard from "../components/service_card";
+import { SectionTitle, ServiceCard } from "../components";
 import { ServiceData } from "../firebase/models";
 
 type Props = {

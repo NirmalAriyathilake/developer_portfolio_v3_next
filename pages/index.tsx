@@ -17,12 +17,15 @@ import {
   ProjectData,
   ServiceData,
 } from "../lib/firebase/models";
-import AboutSection from "../lib/sections/about_section";
-import ContactSection from "../lib/sections/contact_section";
-import FooterSection from "../lib/sections/footer_section";
-import IntroSection from "../lib/sections/intro_section";
-import ProjectsSection from "../lib/sections/projects_section";
-import ServicesSection from "../lib/sections/services_section";
+import {
+  AboutSection,
+  ContactSection,
+  FooterSection,
+  HeaderSection,
+  IntroSection,
+  ProjectsSection,
+  ServicesSection,
+} from "../lib/sections";
 
 const Home: NextPage<{
   introData: IntroSectionData;
@@ -40,6 +43,7 @@ const Home: NextPage<{
       </Head>
 
       <main>
+        <HeaderSection />
         <IntroSection data={props.introData} />
         <AboutSection data={props.aboutData} />
         <ServicesSection data={props.servicesData} />

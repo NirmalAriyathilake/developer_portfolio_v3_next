@@ -1,5 +1,4 @@
-import ContactCard from "../components/contact_card";
-import SectionTitle from "../components/section_title";
+import { ContactCard, SectionTitle } from "../components";
 import { ContactData } from "../firebase/models";
 
 type Props = {

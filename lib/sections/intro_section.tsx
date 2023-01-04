@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import SocialButton from "../components/social_button";
+import { SocialButton } from "../components";
 import { IntroSectionData } from "../firebase/models";
 
 type Props = {

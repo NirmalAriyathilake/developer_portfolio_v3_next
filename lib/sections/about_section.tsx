@@ -1,7 +1,6 @@
 import Image from "next/image";
 
-import AboutInfoCard from "../components/about_info_card";
-import SectionTitle from "../components/section_title";
+import { AboutInfoCard, SectionTitle } from "../components";
 import { AboutSectionData } from "../firebase/models";
 
 type Props = {

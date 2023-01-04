@@ -1,5 +1,4 @@
-import ProjectCard from "../components/project_card";
-import SectionTitle from "../components/section_title";
+import { ProjectCard, SectionTitle } from "../components";
 import { DownloadedAsset, ProjectData } from "../firebase/models";
 
 type Props = {
