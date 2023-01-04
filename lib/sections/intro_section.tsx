@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import SocialButton from "../components/social_button";
 import { IntroSectionData } from "../firebase/models";
@@ -32,13 +33,30 @@ const IntroSection = (props: Props) => {
           </h1>
 
           <div className="flex flex-row gap-5 mt-10">
-            <button className="btn btn-outline btn-primary btn-lg">Contact Me</button>
-            <button className="btn btn-primary btn-lg">Download CV</button>
+            <Link
+              className="btn btn-outline btn-primary btn-lg"
+              href={"#contact"}
+            >
+              Contact Me
+            </Link>
+            <Link
+              className="btn btn-primary btn-lg"
+              href={props.data.cvdownload}
+              target="_blank"
+              download
+              rel="noopener noreferrer"
+            >
+              Download CV
+            </Link>
           </div>
 
           <div className="flex flex-row mt-10 items-center self-center gap-3">
             {props.data.socialLinks.map((link) => (
-              <SocialButton label={link.label} key={link.label} url={link.url}/>
+              <SocialButton
+                label={link.label}
+                key={link.label}
+                url={link.url}
+              />
             ))}
           </div>
         </div>

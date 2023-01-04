@@ -8,8 +8,6 @@ type Props = {
 };
 
 const ServicesSection = (props: Props) => {
-  console.log("ServicesSection props : ", props);
-
   return (
     <div className={props.className}>
       <div className="flex flex-col w-full justify-start items-start px-10 py-10 ">

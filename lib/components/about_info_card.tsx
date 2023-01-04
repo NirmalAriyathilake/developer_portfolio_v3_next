@@ -5,8 +5,6 @@ type Props = {
 };
 
 const AboutInfoCard = (props: Props) => {
-  console.log("AboutInfoCard props : ", props);
-
   return (
     <div
       className={

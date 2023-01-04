@@ -16,6 +16,7 @@ export type IntroSectionData = {
   yearsOfExperience: number;
   socialLinks: IntroSocialLinkData[];
   imageUrl: string;
+  cvdownload: string;
 };
 
 export type IntroSocialLinkData = {
@@ -58,4 +59,12 @@ export type DownloadedAsset = {
   image: any;
   blurUrl: string;
   url: string;
+}
+
+export type ContactData = {
+  iconName: string;
+  iconImage: any;
+  iconBlurUrl: string;
+  value: string;
+  show: string;
 }

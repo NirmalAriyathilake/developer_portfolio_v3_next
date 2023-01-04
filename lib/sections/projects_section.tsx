@@ -9,8 +9,6 @@ type Props = {
 };
 
 const ProjectsSection = (props: Props) => {
-  console.log("ProjectsSection props : ", props);
-
   return (
     <div className={props.className}>
       <div className="flex flex-col w-full justify-start items-center px-10 py-10">

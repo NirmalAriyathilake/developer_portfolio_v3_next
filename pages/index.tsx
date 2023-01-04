@@ -11,12 +11,14 @@ import {
 import { db, storage } from "../lib/firebase/initFirebase";
 import {
   AboutSectionData,
+  ContactData,
   DownloadedAsset,
   IntroSectionData,
   ProjectData,
   ServiceData,
 } from "../lib/firebase/models";
 import AboutSection from "../lib/sections/about_section";
+import ContactSection from "../lib/sections/contact_section";
 import FooterSection from "../lib/sections/footer_section";
 import IntroSection from "../lib/sections/intro_section";
 import ProjectsSection from "../lib/sections/projects_section";
@@ -27,10 +29,9 @@ const Home: NextPage<{
   aboutData: AboutSectionData;
   servicesData: ServiceData[];
   projectsData: ProjectData[];
+  contactsData: ContactData[];
   downloadedAssets: [String, DownloadedAsset][];
 }> = (props) => {
-  console.log("APPLOG : Received Home props : ", props);
-
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center font-body">
       <Head>
@@ -46,6 +47,7 @@ const Home: NextPage<{
           data={props.projectsData}
           downloadedAssets={new Map(props.downloadedAssets)}
         />
+        <ContactSection data={props.contactsData} />
       </main>
 
       <FooterSection />
@@ -58,14 +60,14 @@ export const getServerSideProps: GetServerSideProps<{
   aboutData: AboutSectionData;
   servicesData: ServiceData[];
   projectsData: ProjectData[];
+  contactsData: ContactData[];
   downloadedAssets: [String, DownloadedAsset][];
 }> = async () => {
-  console.log("APPLOG : Calling getServerSideProps");
-
   var introData: IntroSectionData = introSectionDataEmpty;
   var aboutData: AboutSectionData = aboutSectionDataEmpty;
   var servicesData: ServiceData[] = [];
   var projectsData: ProjectData[] = [];
+  var contactsData: ContactData[] = [];
   let downloadedAssets = new Map<String, DownloadedAsset>();
 
   let downloadedAssetsNames = [
@@ -104,37 +106,50 @@ export const getServerSideProps: GetServerSideProps<{
   await get(child(dbRef, "/"))
     .then(async (snapshot) => {
       if (snapshot.exists()) {
-        console.log("APPLOG : Received snapshot : ", snapshot.val());
-
         introData = snapshot.val()["intro"];
         aboutData = snapshot.val()["about"];
         const dbServicesData: ServiceData[] = snapshot.val()["services"];
         const dbProjectsData: ProjectData[] =
           snapshot.val()["featured-projects"];
+        const dbContactsData: ContactData[] = snapshot.val()["contacts"];
 
-        console.log("APPLOG : Received intro : ", introData);
-        console.log("APPLOG : Received about : ", aboutData);
-        console.log("APPLOG : Received services : ", dbServicesData);
-        console.log("APPLOG : Received projects : ", dbProjectsData);
+        const myCVReference = storageRef(
+          storage,
+          "/Nirmal Ariyathilake CV.pdf"
+        );
 
-        const pathReference = storageRef(storage, "/mypic.png");
-        const pathReference2 = storageRef(storage, "/mypic2.png");
+        const myPic1Reference = storageRef(storage, "/mypic.png");
+        const myPic2Reference = storageRef(storage, "/mypic2.png");
 
-        await getDownloadURL(pathReference)
+        await getDownloadURL(myCVReference)
+          .then(async (url) => {
+            introData.cvdownload = url;
+            console.log("APPLOG : Updated intro cvdownload : ", url);
+
+            let downloadedFile = await fetch(url);
+
+            console.log(
+              "APPLOG : Updated intro downloadedFile : ",
+              downloadedFile
+            );
+          })
+          .catch((error) => {
+            console.error("APPLOG : Storage intro cvdownload Error : ", error);
+          });
+
+        await getDownloadURL(myPic1Reference)
           .then(async (url) => {
             introData.imageUrl = url;
-            console.log("APPLOG : Updated intro imageUrl : ", url);
           })
           .catch((error) => {
             console.error("APPLOG : Storage intro Error : ", error);
           });
 
-        await getDownloadURL(pathReference2)
+        await getDownloadURL(myPic2Reference)
           .then(async (url) => {
             var { img, base64 } = await getPlaiceholder(url);
             aboutData.image = img;
             aboutData.blurUrl = base64;
-            console.log("APPLOG : Updated about imageUrl : ", url);
           })
           .catch((error) => {
             console.error("APPLOG : Storage about Error : ", error);
@@ -142,8 +157,6 @@ export const getServerSideProps: GetServerSideProps<{
 
         for (var i = 0; i < dbServicesData.length; i++) {
           const service = dbServicesData[i];
-
-          console.log("APPLOG : Received services service : ", service);
 
           const iconPathReference = storageRef(
             storage,
@@ -155,11 +168,6 @@ export const getServerSideProps: GetServerSideProps<{
               var { img, base64 } = await getPlaiceholder(url);
               service.iconImage = img;
               service.iconBlurUrl = base64;
-
-              console.log(
-                "APPLOG : Updated service " + service.label + " imageUrl : ",
-                url
-              );
 
               servicesData.push(service);
             })
@@ -174,8 +182,6 @@ export const getServerSideProps: GetServerSideProps<{
         for (var i = 0; i < dbProjectsData.length; i++) {
           const project = dbProjectsData[i];
 
-          console.log("APPLOG : Received projects project : ", project);
-
           const iconPathReference = storageRef(
             storage,
             "/" + project.imageName + "-project.png"
@@ -187,16 +193,35 @@ export const getServerSideProps: GetServerSideProps<{
               project.image = img;
               project.imageBlurUrl = base64;
 
-              console.log(
-                "APPLOG : Updated project " + project.title + " imageUrl : ",
-                url
-              );
-
               projectsData.push(project);
             })
             .catch((error) => {
               console.error(
                 "APPLOG : Storage project " + project.title + " Error : ",
+                error
+              );
+            });
+        }
+
+        for (var i = 0; i < dbContactsData.length; i++) {
+          const contact = dbContactsData[i];
+
+          const iconPathReference = storageRef(
+            storage,
+            "/" + contact.iconName + ".png"
+          );
+
+          await getDownloadURL(iconPathReference)
+            .then(async (url) => {
+              var { img, base64 } = await getPlaiceholder(url);
+              contact.iconImage = img;
+              contact.iconBlurUrl = base64;
+
+              contactsData.push(contact);
+            })
+            .catch((error) => {
+              console.error(
+                "APPLOG : Storage contact " + contact.iconName + " Error : ",
                 error
               );
             });
@@ -209,17 +234,13 @@ export const getServerSideProps: GetServerSideProps<{
       console.error("APPLOG : Database Error : ", error);
     });
 
-  console.log("APPLOG : Updated intro : ", introData);
-  console.log("APPLOG : Updated about : ", aboutData);
-  console.log("APPLOG : Updated services : ", servicesData);
-  console.log("APPLOG : Updated projects : ", projectsData);
-
   return {
     props: {
       introData: introData,
       aboutData: aboutData,
       servicesData: servicesData,
       projectsData: projectsData,
+      contactsData: contactsData,
       downloadedAssets: Array.from(downloadedAssets.entries()),
     },
   };

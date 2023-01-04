@@ -10,8 +10,6 @@ type Props = {
 };
 
 const ProjectCard = (props: Props) => {
-  console.log("ServiceCard props : ", props);
-
   return (
     <div
       className="card lg:card-side bg-primary-card shadow-xl border-l-4 border-solid border-primary rounded-r-lg rounded-l-none"

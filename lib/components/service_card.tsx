@@ -11,8 +11,6 @@ type Props = {
 };
 
 const ServiceCard = (props: Props) => {
-  console.log("ServiceCard props : ", props);
-
   return (
     <div
       className={

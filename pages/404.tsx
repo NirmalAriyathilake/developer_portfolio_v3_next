@@ -5,8 +5,6 @@ import Link from "next/link";
 import FooterSection from "../lib/sections/footer_section";
 
 const PageNotFound: NextPage = (props) => {
-  console.log("APPLOG : Received Home props : ", props);
-
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center font-body">
       <Head>
