@@ -10,7 +10,7 @@ type Props = {
 
 const AboutSection = (props: Props) => {
   return (
-    <div className={props.className}>
+    <div className={"scroll-m-24 " + props.className} id="about">
       <div className="flex flex-col w-full justify-start items-start px-10 py-10 ">
         <SectionTitle title="ABOUT ME" />
         <div className="flex flex-row items-center">

@@ -7,7 +7,7 @@ type Props = {
 
 const SocialButton = (props: Props) => (
   <Link
-    className="btn btn-ghost hover:btn-link"
+    className="btn btn-link no-underline hover:no-underline social-btn mb-5 "
     href={props.url}
     target="_blank"
   >

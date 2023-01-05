@@ -28,6 +28,64 @@
   bottom: -5px;
   left: 0;
   width: 60px;
-  height: 3px;
+  height: 4px;
   background-color: #ff7f2a;
+}
+
+.header-item {
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.header-item::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 0;
+  background-color: #FF7F2A;
+  height: 4px;
+  width: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.header-item:hover::before {
+  width: 50%;
+}
+
+.header-item-active {
+  position: relative;
+}
+
+.header-item-active::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 0;
+  background-color: #FF7F2A;
+  height: 4px;
+  width: 50%;
+}
+
+.social-btn {
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.social-btn::before {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 12px;
+  right: 0;
+  background-color: #FF7F2A;
+  height: 3px;
+  width: 0;
+  transition: all 0.2s ease-in-out;
+  
+}
+
+.social-btn:hover::before {
+  width: 50%;
 }

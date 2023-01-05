@@ -44,7 +44,7 @@ const Home: NextPage<{
 
       <main>
         <HeaderSection />
-        <IntroSection data={props.introData} />
+        <IntroSection data={props.introData} className="mt-24" />
         <AboutSection data={props.aboutData} />
         <ServicesSection data={props.servicesData} />
         <ProjectsSection
