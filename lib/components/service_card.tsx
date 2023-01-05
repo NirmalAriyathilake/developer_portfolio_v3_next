@@ -14,7 +14,7 @@ const ServiceCard = (props: Props) => {
   return (
     <div
       className={
-        "flex flex-col items-center rounded-xl shadow-lg relative " +
+        "flex flex-col items-center rounded-xl shadow-lg relative bg-primary-card " +
         props.className
       }
     >
@@ -27,7 +27,7 @@ const ServiceCard = (props: Props) => {
         blurDataURL={props.iconBlurUrl}
         width={150}
       />
-      <div className="px-5 py-5 flex flex-col items-center bg-primary-card ">
+      <div className="px-5 py-5 flex flex-col items-center ">
         <div className="text-xl font-semibold mb-2 mt-20">{props.label}</div>
         <div className="text-base text-justify mt-2">{props.description}</div>
         <Link

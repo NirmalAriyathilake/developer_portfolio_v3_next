@@ -31,10 +31,10 @@ const ProjectCard = (props: Props) => {
         <div className="flex flex-row justify-between">
           <div className="flex flex-col gap-2">
             {props.project.points.map((point) => (
-              <div key={point.label} className="flex flex-row">
-                <div className="font-semibold">{point.label} :</div>
-                <div>&nbsp;{point.value}</div>
-              </div>
+              <p key={point.label}>
+                <span className="font-semibold">{point.label} :</span>{" "}
+                {point.value}
+              </p>
             ))}
           </div>
           <div className="card-actions justify-end flex flex-col items-end gap-5">
