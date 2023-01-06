@@ -7,8 +7,8 @@ import { getPlaiceholder } from "plaiceholder";
 import {
   aboutSectionDataEmpty,
   introSectionDataEmpty,
-} from "../lib/firebase/emptyObjects";
-import { db, storage } from "../lib/firebase/initFirebase";
+} from "../lib/data/emptyObjects";
+import { db, storage } from "../lib/data/initFirebase";
 import {
   AboutSectionData,
   ContactData,
@@ -16,7 +16,7 @@ import {
   IntroSectionData,
   ProjectData,
   ServiceData,
-} from "../lib/firebase/models";
+} from "../lib/data/models";
 import {
   AboutSection,
   ContactSection,
@@ -44,7 +44,7 @@ const Home: NextPage<{
 
       <main>
         <HeaderSection />
-        <IntroSection data={props.introData} className="mt-24" />
+        <IntroSection data={props.introData} className="pt-24" />
         <AboutSection data={props.aboutData} />
         <ServicesSection data={props.servicesData} />
         <ProjectsSection

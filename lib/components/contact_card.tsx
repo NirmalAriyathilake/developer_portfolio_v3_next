@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ContactData } from "../firebase/models";
+import { ContactData } from "../data/models";
 
 type Props = {
   contact: ContactData;
@@ -16,7 +16,11 @@ const ContactCard = (props: Props) => {
       href={props.contact.value}
       target="_blank"
     >
-      <Image {...props.contact.iconImage} alt={props.contact.iconName} width={48} />
+      <Image
+        {...props.contact.iconImage}
+        alt={props.contact.iconName}
+        width={48}
+      />
       <p className="text-lg mt-5">{props.contact.show}</p>
     </Link>
   );

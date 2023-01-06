@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import { DownloadedAsset, ProjectData } from "../../lib/firebase/models";
+import { DownloadedAsset, ProjectData } from "../../lib/data/models";
 import { FooterSection } from "../../lib/sections";
 
 const ProjectsPage: NextPage<{

@@ -68,3 +68,8 @@ export type ContactData = {
   value: string;
   show: string;
 }
+
+export type HeaderItemData = {
+  label: string;
+  link: string;
+}

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { DownloadedAsset, ProjectData } from "../firebase/models";
+import { DownloadedAsset, ProjectData } from "../data/models";
 
 type Props = {
   project: ProjectData;

@@ -13,4 +13,5 @@ export const introSectionDataEmpty: IntroSectionData = {
   yearsOfExperience: 0,
   socialLinks: [],
   imageUrl: "",
+  cvdownload: ""
 };
