@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { ProjectCard, SectionTitle } from "../components";
 import { DownloadedAsset, ProjectData } from "../firebase/models";
 
@@ -21,6 +23,12 @@ const ProjectsSection = (props: Props) => {
             />
           ))}
         </div>
+        <Link
+          href={"projects"}
+          className="btn btn-outline btn-primary btn-lg mt-14 "
+        >
+          MORE PROJECTS
+        </Link>
       </div>
     </div>
   );

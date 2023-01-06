@@ -11,7 +11,14 @@ const FooterSection = (props: Props) => (
       props.className
     }
   >
-    Powered by <Image src="/logo_footer.png" alt="Logo" className="mx-5" width={121} height={16} />
+    Copyright &copy; {`${new Date().getFullYear()}`} - All rights reserved by
+    <Image
+      src="/logo_footer.png"
+      alt="Logo"
+      className="mx-5"
+      width={121}
+      height={16}
+    />
   </footer>
 );
 

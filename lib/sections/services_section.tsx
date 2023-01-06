@@ -11,7 +11,7 @@ const ServicesSection = (props: Props) => {
     <div className={"scroll-m-24 " + props.className} id="services">
       <div className="flex flex-col w-full justify-start items-start px-10 py-10 ">
         <SectionTitle title="MY SERVICES" />
-        <div className="grid grid-rows-1 grid-cols-3 gap-5 mt-24">
+        <div className="grid grid-rows-1 grid-cols-3 gap-5 mt-28">
           {props.data.map((service) => (
             <ServiceCard
               key={service.label}
