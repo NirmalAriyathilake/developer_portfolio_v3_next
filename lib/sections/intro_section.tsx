@@ -12,10 +12,7 @@ type Props = {
 const IntroSection = (props: Props) => {
   return (
     <div
-      className={
-        "flex flex-row w-full top-0 bg-primary-bg items-center pl-10 " +
-        props.className
-      }
+      className={`flex lg:flex-row flex-col w-full top-0 bg-base-300 items-center pl-10 ${props.className}`}
     >
       <div className="flex flex-col w-full items-start ml-10">
         <h1 className="text-9xl font-bold">

@@ -3,89 +3,53 @@
 @tailwind utilities;
 
 .dash-title {
-  position: relative;
-  margin-left: 70px;
+  @apply relative ml-16;
 }
 
 .dash-title::before {
-  content: "";
-  position: absolute;
-  left: -70px;
-  margin-left: 10px;
-  top: 50%;
-  height: 3px;
-  width: 45px;
-  background-color: #ff7f2a;
+  @apply content-[""] absolute -left-16 ml-2 top-1/2 h-1 w-11 bg-primary rounded-lg;
 }
 
 .section-title {
-  position: relative;
+  @apply relative;
 }
 
 .section-title::before {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 60px;
-  height: 4px;
-  background-color: #ff7f2a;
+  @apply content-[""] absolute -bottom-2 left-0 w-2/5 h-1 bg-primary rounded-lg;
 }
 
 .header-item {
-  position: relative;
-  transition: all 0.2s ease-in-out;
+  @apply relative;
+  @apply transition-all duration-200 ease-in-out;
 }
 
 .header-item::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 12px;
-  right: 0;
-  background-color: #FF7F2A;
-  height: 4px;
-  width: 0;
-  transition: all 0.2s ease-in-out;
+  @apply content-[""] absolute bottom-0 left-3 right-0 bg-primary h-1 w-0 rounded-lg;
+  @apply transition-all duration-200 ease-in-out;
 }
 
 .header-item:hover::before {
-  width: 50%;
+  @apply w-1/2;
 }
 
 .header-item-active {
-  position: relative;
+  @apply relative;
 }
 
 .header-item-active::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 12px;
-  right: 0;
-  background-color: #FF7F2A;
-  height: 4px;
-  width: 50%;
+  @apply content-[""] absolute bottom-0 left-3 right-0 bg-primary h-1 w-1/2 rounded-lg;
 }
 
 .social-btn {
-  position: relative;
-  transition: all 0.2s ease-in-out;
+  @apply relative;
+  @apply transition-all duration-200 ease-in-out;
 }
 
 .social-btn::before {
-  content: "";
-  position: absolute;
-  bottom: 5px;
-  left: 12px;
-  right: 0;
-  background-color: #FF7F2A;
-  height: 3px;
-  width: 0;
-  transition: all 0.2s ease-in-out;
-  
+  @apply content-[""] absolute bottom-1 left-3 right-0 bg-primary h-1 w-0 rounded-lg;
+  @apply transition-all duration-200 ease-in-out;
 }
 
 .social-btn:hover::before {
-  width: 50%;
+  @apply w-1/2;
 }

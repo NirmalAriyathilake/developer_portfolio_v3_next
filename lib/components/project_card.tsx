@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
-import { DownloadedAsset, ProjectData } from "../data/models";
+import { DownloadedAsset, ProjectData, ProjectLinkData } from "../data/models";
 
 type Props = {
   project: ProjectData;
@@ -10,9 +12,41 @@ type Props = {
 };
 
 const ProjectCard = (props: Props) => {
+  const { systemTheme, theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  function ThemedButton(link: ProjectLinkData) {
+    if (!mounted) return null;
+
+    const currentTheme = theme === "system" ? systemTheme : theme;
+
+    const suffix = currentTheme == "dark" ? "Dark" : "";
+
+    return (
+      <Link
+        className="shadow-lg"
+        href={link.url}
+        target="_blank"
+        key={link.url}
+      >
+        <Image
+          {...props.downloadedAssets.get(link.type + suffix)?.image}
+          alt="Action Button"
+          placeholder="blur"
+          blurDataURL={props.downloadedAssets.get(link.type + suffix)?.blurUrl}
+          width={211}
+        />
+      </Link>
+    );
+  }
+
   return (
     <div
-      className="card lg:card-side bg-primary-card shadow-xl border-l-4 border-solid border-primary rounded-r-lg rounded-l-none"
+      className={`card lg:card-side shadow-lg border-l-4 border-solid border-primary rounded-r-lg rounded-l-none bg-base-200 ${props.className}`}
       key={props.project.title}
     >
       <div
@@ -38,22 +72,7 @@ const ProjectCard = (props: Props) => {
             ))}
           </div>
           <div className="card-actions justify-end flex flex-col items-end gap-5">
-            {props.project.links.map((link) => (
-              <Link
-                className="shadow-lg"
-                href={link.url}
-                target="_blank"
-                key={link.url}
-              >
-                <Image
-                  {...props.downloadedAssets.get(link.type)?.image}
-                  alt="Action Button"
-                  placeholder="blur"
-                  blurDataURL={props.downloadedAssets.get(link.type)?.blurUrl}
-                  width={211}
-                />
-              </Link>
-            ))}
+            {props.project.links.map((link) => ThemedButton(link))}
           </div>
         </div>
       </div>

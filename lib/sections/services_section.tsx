@@ -9,13 +9,10 @@ type Props = {
 const ServicesSection = (props: Props) => {
   return (
     <div
-      className={
-        "scroll-m-24 flex flex-col w-full justify-start items-start px-10 py-10 " +
-        props.className
-      }
+      className={`scroll-m-24 flex flex-col w-full justify-start items-start px-10 py-10 ${props.className}`}
       id="services"
     >
-      <SectionTitle title="MY SERVICES" />
+      <SectionTitle title="My Services" />
       <div className="grid grid-rows-1 grid-cols-3 gap-5 mt-28">
         {props.data.map((service) => (
           <ServiceCard

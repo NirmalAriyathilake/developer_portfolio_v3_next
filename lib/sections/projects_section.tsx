@@ -12,13 +12,10 @@ type Props = {
 const ProjectsSection = (props: Props) => {
   return (
     <div
-      className={
-        "scroll-m-24 flex flex-col w-full justify-start items-center px-10 py-10 " +
-        props.className
-      }
+      className={`scroll-m-24 flex flex-col w-full justify-start items-center px-10 py-10 ${props.className}`}
       id="projects"
     >
-      <SectionTitle title="MY PROJECTS" />
+      <SectionTitle title="My Projects" />
       <div className="flex flex-col gap-10 mt-5">
         {props.data.map((project) => (
           <ProjectCard

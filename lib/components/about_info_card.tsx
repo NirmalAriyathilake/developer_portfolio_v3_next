@@ -7,10 +7,7 @@ type Props = {
 const AboutInfoCard = (props: Props) => {
   return (
     <div
-      className={
-        "px-3 py-3 flex flex-col items-start bg-primary-card border-l-4 border-solid border-primary rounded-r-lg " +
-        props.className
-      }
+      className={`px-3 py-3 flex flex-col items-start bg-base-200 border-l-4 border-solid border-primary rounded-r-lg shadow-lg ${props.className}`}
     >
       <div className="text-xl font-semibold mb-2">{props.label}</div>
       <div className="text-xl">{props.value}</div>

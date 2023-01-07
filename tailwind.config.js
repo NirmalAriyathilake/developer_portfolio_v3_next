@@ -6,6 +6,7 @@ module.exports = {
     "./lib/**/*.{js,ts,jsx,tsx}",
     "./app/**/*.{js,ts,jsx,tsx}",
   ],
+  // darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -14,9 +15,9 @@ module.exports = {
       },
       colors: {
         primary: {
-          bg: "#FFEBD6",
+          // bg: "#FFEBD6",
           DEFAULT: "#FF7F2A",
-          card: "#F6F2EE",
+          // card: "#F6F2EE",
         },
       },
     },
@@ -25,10 +26,17 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        bumblebee: {
+        light: {
           ...require("daisyui/src/colors/themes")["[data-theme=bumblebee]"],
           primary: "#FF7F2A",
-          // "primary-focus": "#FF660A",
+          "primary-content": "#131616",
+          "base-200": "#F6F2EE",
+          "base-300": "#FFF3EB",
+          "base-content": "#131616",
+        },
+        dark: {
+          ...require("daisyui/src/colors/themes")["[data-theme=halloween]"],
+          primary: "#FF7F2A",
         },
       },
     ],

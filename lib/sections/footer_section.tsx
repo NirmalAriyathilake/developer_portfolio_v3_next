@@ -6,10 +6,7 @@ type Props = {
 
 const FooterSection = (props: Props) => (
   <footer
-    className={
-      "relative flex h-24 w-full items-center justify-center border-t" +
-      props.className
-    }
+    className={`relative flex h-24 w-full items-center justify-center border-t ${props.className}`}
   >
     Copyright &copy; {`${new Date().getFullYear()}`} - All rights reserved by
     <Image

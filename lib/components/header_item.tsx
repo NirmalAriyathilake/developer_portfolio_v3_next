@@ -10,10 +10,7 @@ const HeaderItem = (props: Props) => {
   return (
     <Link
       href={props.link}
-      className={
-        "btn btn-link no-underline hover:no-underline " +
-        props.className
-      }
+      className={`btn btn-link no-underline hover:no-underline ${props.className}`}
     >
       {props.label}
     </Link>

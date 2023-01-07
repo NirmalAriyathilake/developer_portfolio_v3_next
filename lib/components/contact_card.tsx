@@ -12,7 +12,7 @@ const ContactCard = (props: Props) => {
   return (
     <Link
       key={props.contact.iconName}
-      className="flex flex-col justify-center items-center bg-primary-card p-5 border-l-4 border-primary rounded-r-lg"
+      className={`flex flex-col justify-center items-center bg-base-200 p-5 border-l-4 border-primary rounded-r-lg shadow-lg ${props.className}`}
       href={props.contact.value}
       target="_blank"
     >

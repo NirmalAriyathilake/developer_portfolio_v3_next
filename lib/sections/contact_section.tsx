@@ -8,16 +8,17 @@ type Props = {
 
 const ContactSection = (props: Props) => (
   <div
-    className={
-      "scroll-m-24 flex flex-col w-full justify-start items-center px-10 py-10 " +
-      props.className
-    }
+    className={`scroll-m-24 flex flex-col w-full justify-start items-center px-10 py-10 ${props.className}`}
     id="contact"
   >
-    <SectionTitle title="CONTACT ME" />
-    <div className="flex flex-col lg:flex-row gap-10 mt-5">
+    <SectionTitle title="Contact Me" />
+    <div className="flex flex-col lg:flex-row gap-10 mt-5 lg:w-full ">
       {props.data.map((contact) => (
-        <ContactCard contact={contact} key={contact.iconName} />
+        <ContactCard
+          contact={contact}
+          key={contact.iconName}
+          className="lg:basis-1/3"
+        />
       ))}
     </div>
   </div>

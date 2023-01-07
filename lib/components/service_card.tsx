@@ -13,10 +13,7 @@ type Props = {
 const ServiceCard = (props: Props) => {
   return (
     <div
-      className={
-        "flex flex-col items-center rounded-xl shadow-lg relative bg-primary-card " +
-        props.className
-      }
+      className={`flex flex-col items-center rounded-xl shadow-lg relative bg-base-200 ${props.className}`}
     >
       <Image
         {...props.iconImage}

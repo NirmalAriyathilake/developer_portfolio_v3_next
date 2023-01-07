@@ -76,8 +76,11 @@ export const getServerSideProps: GetServerSideProps<{
 
   let downloadedAssetsNames = [
     "ButtonAppSite",
+    "ButtonAppSiteDark",
     "ButtonPlaystore",
+    "ButtonPlaystoreDark",
     "ButtonWebSite",
+    "ButtonWebSiteDark",
     "FlutterBackdrop",
     "AndroidBackdrop",
     "SvelteBackdrop",
@@ -128,14 +131,6 @@ export const getServerSideProps: GetServerSideProps<{
         await getDownloadURL(myCVReference)
           .then(async (url) => {
             introData.cvdownload = url;
-            console.log("APPLOG : Updated intro cvdownload : ", url);
-
-            let downloadedFile = await fetch(url);
-
-            console.log(
-              "APPLOG : Updated intro downloadedFile : ",
-              downloadedFile
-            );
           })
           .catch((error) => {
             console.error("APPLOG : Storage intro cvdownload Error : ", error);
