@@ -41,3 +41,5 @@ saved_data
 # firebase files
 *-debug.log
 .firebaserc
+
+pnpm-lock.yaml
