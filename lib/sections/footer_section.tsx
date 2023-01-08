@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import logoFooter from "../../public/logo_footer.png";
+
 type Props = {
   className?: string | undefined;
 };
@@ -10,7 +12,7 @@ const FooterSection = (props: Props) => (
   >
     Copyright &copy; {`${new Date().getFullYear()}`} - All rights reserved by
     <Image
-      src="/logo_footer.png"
+      src={logoFooter}
       alt="Logo"
       className="mx-5"
       width={121}
