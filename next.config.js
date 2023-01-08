@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-  path: "https://nirmalcode-developer-portfolio-v3-next.pages.dev/_next/image",
   images: {
+    path: "https://nirmalcode-developer-portfolio-v3-next.pages.dev/_next/image",
     domains: [
       "localhost",
       "firebasestorage.googleapis.com",
