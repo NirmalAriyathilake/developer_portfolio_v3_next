@@ -3,11 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 
-import HeaderItem from "../components/header_item";
-import { HeaderItemData } from "../data/models";
+import { HeaderItem } from "../components";
+import { DownloadedAsset, HeaderItemData } from "../data/models";
 
 type Props = {
   headerLinks: HeaderItemData[];
+  downloadedAssets: Map<String, DownloadedAsset>;
   className?: string | undefined;
 };
 
@@ -74,19 +75,16 @@ const HeaderSection = (props: Props) => {
     });
   }, []);
 
-  const menuClick = useCallback(
-    (event: any) => {
-      const menu = document.querySelector("#app-menu");
-      const nav = document.querySelector("#HeaderSection");
+  const menuClick = () => {
+    const menu = document.querySelector("#app-menu");
+    const nav = document.querySelector("#HeaderSection");
 
-      menu?.classList.toggle("hidden");
+    menu?.classList.toggle("hidden");
 
-      if (!headerActive) {
-        nav?.classList.toggle("shadow-xl");
-      }
-    },
-    [headerActive]
-  );
+    if (!headerActive) {
+      nav?.classList.toggle("shadow-xl");
+    }
+  };
 
   useEffect(() => {
     //add eventlistener to window
@@ -98,7 +96,7 @@ const HeaderSection = (props: Props) => {
     };
   }, [onScroll]);
 
-  function ThemedLogo() {
+  const ThemedLogo = () => {
     if (!mounted) return null;
     let src;
 
@@ -106,24 +104,24 @@ const HeaderSection = (props: Props) => {
 
     switch (currentTheme) {
       case "dark":
-        src = "/logo-dark.png";
+        src = "logoDark";
         break;
       case "light":
       default:
-        src = "/logo.png";
+        src = "logo";
         break;
     }
 
     return (
       <Image
-        src={src}
+        {...props.downloadedAssets.get(src)?.image}
         className="btn btn-square border-none btn-lg"
         width={64}
         height={64}
         alt="Logo"
       />
     );
-  }
+  };
 
   const renderThemeChanger = () => {
     if (!mounted) return null;
@@ -187,52 +185,58 @@ const HeaderSection = (props: Props) => {
           {ThemedLogo()}
         </Link>
 
-        <div className="hidden lg:inline-flex lg:flex-grow lg:w-auto flex-row gap-10 text-lg text-primary font-semibold">
-          <div className="inline-flex flex-row ml-auto w-auto items-center h-auto">
-            {props.headerLinks.map((headerLink) => (
-              <HeaderItem
-                label={headerLink.label}
-                link={headerLink.link}
-                key={headerLink.label}
-                className="header-item"
-              />
-            ))}
+        {props.headerLinks.length > 0 ? (
+          <div className="hidden lg:inline-flex lg:flex-grow lg:w-auto flex-row gap-10 text-lg text-primary font-semibold">
+            <div className="inline-flex flex-row ml-auto w-auto items-center h-auto">
+              {props.headerLinks.map((headerLink) => (
+                <HeaderItem
+                  label={headerLink.label}
+                  link={headerLink.link}
+                  key={headerLink.label}
+                  className="header-item"
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
         <div className="inline-flex ml-auto">
           {renderThemeChanger()}
-          <button
-            className="p-3 rounded lg:hidden text-primary hover:text-primary outline-none hover:ring-2 ring-primary "
-            onClick={menuClick}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+          {props.headerLinks.length > 0 ? (
+            <button
+              className="p-3 rounded lg:hidden text-primary hover:text-primary outline-none hover:ring-2 ring-primary "
+              onClick={menuClick}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          ) : null}
         </div>
-        <div className="hidden w-full lg:hidden" id="app-menu">
-          <div className="w-full items-center  flex flex-col gap-2">
-            {props.headerLinks.map((headerLink) => (
-              <HeaderItem
-                label={headerLink.label}
-                link={headerLink.link}
-                key={headerLink.label}
-                className="hover:bg-white btn-block header-item-mobile"
-              />
-            ))}
+        {props.headerLinks.length > 0 ? (
+          <div className="hidden w-full lg:hidden" id="app-menu">
+            <div className="w-full items-center  flex flex-col gap-2">
+              {props.headerLinks.map((headerLink) => (
+                <HeaderItem
+                  label={headerLink.label}
+                  link={headerLink.link}
+                  key={headerLink.label}
+                  className="hover:bg-white btn-block header-item-mobile"
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </>
   );

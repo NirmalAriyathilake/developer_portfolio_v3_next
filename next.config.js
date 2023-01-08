@@ -6,12 +6,5 @@ module.exports = {
       "localhost",
       "firebasestorage.googleapis.com",
     ],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "firebasestorage.googleapis.com",
-        port: "",
-      },
-    ],
   },
 };

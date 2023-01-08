@@ -44,7 +44,10 @@ const Home: NextPage<{
       </Head>
 
       <main>
-        <HeaderSection headerLinks={homeHeaderLinks} />
+        <HeaderSection
+          headerLinks={homeHeaderLinks}
+          downloadedAssets={new Map(props.downloadedAssets)}
+        />
         <IntroSection data={props.introData} className="pt-24" />
         <AboutSection data={props.aboutData} />
         <ServicesSection data={props.servicesData} />
@@ -55,7 +58,7 @@ const Home: NextPage<{
         <ContactSection data={props.contactsData} />
       </main>
 
-      <FooterSection />
+      <FooterSection downloadedAssets={new Map(props.downloadedAssets)} />
     </div>
   );
 };
@@ -85,6 +88,9 @@ export const getServerSideProps: GetServerSideProps<{
     "backdrops/FlutterBackdrop",
     "backdrops/AndroidBackdrop",
     "backdrops/SvelteBackdrop",
+    "site/logo",
+    "site/logoDark",
+    "site/logoFooter",
   ];
 
   const dbRef = databaseRef(db);

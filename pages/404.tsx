@@ -2,9 +2,6 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import { HeaderSection } from "../lib/sections";
-import FooterSection from "../lib/sections/footer_section";
-
 const PageNotFound: NextPage = (props) => {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center font-body">
@@ -14,7 +11,6 @@ const PageNotFound: NextPage = (props) => {
       </Head>
 
       <main className="flex flex-col items-center grow justify-center">
-        <HeaderSection headerLinks={[]} />
         <div className="flex flex-row text-3xl">
           <p className="font-bold mr-5">404</p> |{" "}
           <p className="ml-5">This page could not be found</p>
@@ -23,8 +19,6 @@ const PageNotFound: NextPage = (props) => {
           Go back Home
         </Link>
       </main>
-
-      <FooterSection />
     </div>
   );
 };

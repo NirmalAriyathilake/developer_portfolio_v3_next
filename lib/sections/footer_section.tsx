@@ -1,8 +1,9 @@
 import Image from "next/image";
 
-import logoFooter from "../../public/logo_footer.png";
+import { DownloadedAsset } from "../data/models";
 
 type Props = {
+  downloadedAssets: Map<String, DownloadedAsset>;
   className?: string | undefined;
 };
 
@@ -12,7 +13,7 @@ const FooterSection = (props: Props) => (
   >
     Copyright &copy; {`${new Date().getFullYear()}`} - All rights reserved by
     <Image
-      src={logoFooter}
+      {...props.downloadedAssets.get("logoFooter")?.image}
       alt="Logo"
       className="mx-5"
       width={121}
