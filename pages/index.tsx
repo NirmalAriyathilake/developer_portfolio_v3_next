@@ -4,6 +4,7 @@ import { child, get, ref as databaseRef } from "firebase/database";
 import { getDownloadURL, ref as storageRef } from "firebase/storage";
 import { getPlaiceholder } from "plaiceholder";
 
+import { homeHeaderLinks } from "../lib/data/constants";
 import {
   aboutSectionDataEmpty,
   introSectionDataEmpty,
@@ -11,10 +12,10 @@ import {
 import { db, storage } from "../lib/data/initFirebase";
 import {
   AboutSectionData,
+  AppProjectData,
   ContactData,
   DownloadedAsset,
   IntroSectionData,
-  ProjectData,
   ServiceData,
 } from "../lib/data/models";
 import {
@@ -31,7 +32,7 @@ const Home: NextPage<{
   introData: IntroSectionData;
   aboutData: AboutSectionData;
   servicesData: ServiceData[];
-  projectsData: ProjectData[];
+  projectsData: AppProjectData[];
   contactsData: ContactData[];
   downloadedAssets: [String, DownloadedAsset][];
 }> = (props) => {
@@ -43,7 +44,7 @@ const Home: NextPage<{
       </Head>
 
       <main>
-        <HeaderSection />
+        <HeaderSection headerLinks={homeHeaderLinks} />
         <IntroSection data={props.introData} className="pt-24" />
         <AboutSection data={props.aboutData} />
         <ServicesSection data={props.servicesData} />
@@ -63,27 +64,27 @@ export const getServerSideProps: GetServerSideProps<{
   introData: IntroSectionData;
   aboutData: AboutSectionData;
   servicesData: ServiceData[];
-  projectsData: ProjectData[];
+  projectsData: AppProjectData[];
   contactsData: ContactData[];
   downloadedAssets: [String, DownloadedAsset][];
 }> = async () => {
   var introData: IntroSectionData = introSectionDataEmpty;
   var aboutData: AboutSectionData = aboutSectionDataEmpty;
   var servicesData: ServiceData[] = [];
-  var projectsData: ProjectData[] = [];
+  var projectsData: AppProjectData[] = [];
   var contactsData: ContactData[] = [];
   let downloadedAssets = new Map<String, DownloadedAsset>();
 
   let downloadedAssetsNames = [
-    "ButtonAppSite",
-    "ButtonAppSiteDark",
-    "ButtonPlaystore",
-    "ButtonPlaystoreDark",
-    "ButtonWebSite",
-    "ButtonWebSiteDark",
-    "FlutterBackdrop",
-    "AndroidBackdrop",
-    "SvelteBackdrop",
+    "buttons/ButtonAppSite",
+    "buttons/ButtonAppSiteDark",
+    "buttons/ButtonPlaystore",
+    "buttons/ButtonPlaystoreDark",
+    "buttons/ButtonWebSite",
+    "buttons/ButtonWebSiteDark",
+    "backdrops/FlutterBackdrop",
+    "backdrops/AndroidBackdrop",
+    "backdrops/SvelteBackdrop",
   ];
 
   const dbRef = databaseRef(db);
@@ -100,7 +101,9 @@ export const getServerSideProps: GetServerSideProps<{
           url: url,
         };
 
-        downloadedAssets.set(name, downloadedAsset);
+        let namepath = name.split("/");
+
+        downloadedAssets.set(namepath[namepath.length - 1], downloadedAsset);
       })
       .catch((error) => {
         console.error(
@@ -116,17 +119,17 @@ export const getServerSideProps: GetServerSideProps<{
         introData = snapshot.val()["intro"];
         aboutData = snapshot.val()["about"];
         const dbServicesData: ServiceData[] = snapshot.val()["services"];
-        const dbProjectsData: ProjectData[] =
+        const dbProjectsData: AppProjectData[] =
           snapshot.val()["featured-projects"];
         const dbContactsData: ContactData[] = snapshot.val()["contacts"];
 
         const myCVReference = storageRef(
           storage,
-          "/Nirmal Ariyathilake CV.pdf"
+          "/my/Nirmal Ariyathilake CV.pdf"
         );
 
-        const myPic1Reference = storageRef(storage, "/mypic.png");
-        const myPic2Reference = storageRef(storage, "/mypic2.png");
+        const myPic1Reference = storageRef(storage, "/my/mypic.png");
+        const myPic2Reference = storageRef(storage, "/my/mypic2.png");
 
         await getDownloadURL(myCVReference)
           .then(async (url) => {
@@ -159,7 +162,7 @@ export const getServerSideProps: GetServerSideProps<{
 
           const iconPathReference = storageRef(
             storage,
-            "/" + service.icon + ".png"
+            "/services/" + service.icon + ".png"
           );
 
           await getDownloadURL(iconPathReference)
@@ -183,7 +186,7 @@ export const getServerSideProps: GetServerSideProps<{
 
           const iconPathReference = storageRef(
             storage,
-            "/" + project.imageName + "-project.png"
+            "/projects/" + project.imageName + "-project.png"
           );
 
           await getDownloadURL(iconPathReference)
@@ -207,7 +210,7 @@ export const getServerSideProps: GetServerSideProps<{
 
           const iconPathReference = storageRef(
             storage,
-            "/" + contact.iconName + ".png"
+            "/contacts/" + contact.iconName + ".png"
           );
 
           await getDownloadURL(iconPathReference)

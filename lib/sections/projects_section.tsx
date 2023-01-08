@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import { ProjectCard, SectionTitle } from "../components";
-import { DownloadedAsset, ProjectData } from "../data/models";
+import { ProjectsContainer, SectionTitle } from "../components";
+import { AppProjectData, DownloadedAsset } from "../data/models";
 
 type Props = {
-  data: ProjectData[];
+  data: AppProjectData[];
   downloadedAssets: Map<String, DownloadedAsset>;
   className?: string | undefined;
 };
@@ -16,15 +16,10 @@ const ProjectsSection = (props: Props) => {
       id="projects"
     >
       <SectionTitle title="My Projects" />
-      <div className="flex flex-col gap-10 mt-5">
-        {props.data.map((project) => (
-          <ProjectCard
-            project={project}
-            key={project.title}
-            downloadedAssets={props.downloadedAssets}
-          />
-        ))}
-      </div>
+      <ProjectsContainer
+        data={props.data}
+        downloadedAssets={props.downloadedAssets}
+      />
       <Link
         href={"projects"}
         className="btn btn-outline btn-primary btn-lg mt-14 "

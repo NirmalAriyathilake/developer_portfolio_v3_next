@@ -43,21 +43,21 @@ export type ProjectLinkData = {
   url: string;
 }
 
-export type ProjectData = {
-  title: string;
-  language: string;
-  imageName: string;
+export type AppProjectData = {
+  description: string;
   image: any;
   imageBlurUrl: string;
-  shortDescription: string;
-  description: string;
-  points: ProjectPointData[];
+  imageName: string;
+  language: string;
   links: ProjectLinkData[];
+  points: ProjectPointData[];
+  shortDescription: string;
+  title: string;
 }
 
 export type DownloadedAsset = {
-  image: any;
   blurUrl: string;
+  image: any;
   url: string;
 }
 
@@ -65,11 +65,24 @@ export type ContactData = {
   iconName: string;
   iconImage: any;
   iconBlurUrl: string;
-  value: string;
   show: string;
+  value: string;
 }
 
 export type HeaderItemData = {
   label: string;
   link: string;
+}
+
+export type PackageProjectData = {
+  description: string;
+  image: any;
+  imageBlurUrl: string;
+  imageName: string;
+  language: string;
+  links: ProjectLinkData[];
+  points: ProjectPointData[];
+  sampleCode: [];
+  shortDescription: string;
+  title: string;
 }

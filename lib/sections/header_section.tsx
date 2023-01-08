@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 
 import HeaderItem from "../components/header_item";
-import { headerLinks } from "../data/constants";
+import { HeaderItemData } from "../data/models";
 
 type Props = {
+  headerLinks: HeaderItemData[];
   className?: string | undefined;
 };
 
@@ -188,7 +189,7 @@ const HeaderSection = (props: Props) => {
 
         <div className="hidden lg:inline-flex lg:flex-grow lg:w-auto flex-row gap-10 text-lg text-primary font-semibold">
           <div className="inline-flex flex-row ml-auto w-auto items-center h-auto">
-            {headerLinks.map((headerLink) => (
+            {props.headerLinks.map((headerLink) => (
               <HeaderItem
                 label={headerLink.label}
                 link={headerLink.link}
@@ -222,7 +223,7 @@ const HeaderSection = (props: Props) => {
         </div>
         <div className="hidden w-full lg:hidden" id="app-menu">
           <div className="w-full items-center  flex flex-col gap-2">
-            {headerLinks.map((headerLink) => (
+            {props.headerLinks.map((headerLink) => (
               <HeaderItem
                 label={headerLink.label}
                 link={headerLink.link}

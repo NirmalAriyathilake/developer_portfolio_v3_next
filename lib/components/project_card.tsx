@@ -3,10 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 
-import { DownloadedAsset, ProjectData, ProjectLinkData } from "../data/models";
+import {
+  AppProjectData,
+  DownloadedAsset,
+  ProjectLinkData,
+} from "../data/models";
 
 type Props = {
-  project: ProjectData;
+  project: AppProjectData;
   downloadedAssets: Map<String, DownloadedAsset>;
   className?: string | undefined;
 };
@@ -59,8 +63,8 @@ const ProjectCard = (props: Props) => {
           height: "100%",
         }}
       >
-        <div className="card-title">{props.project.title}</div>
-        <div className="dash-title">{props.project.shortDescription}</div>
+        <h2 className="card-title">{props.project.title}</h2>
+        <h3 className="dash-title">{props.project.shortDescription}</h3>
         <p className="my-5">{props.project.description}</p>
         <div className="flex flex-row justify-between">
           <div className="flex flex-col gap-2">

@@ -1,6 +1,6 @@
 import { HeaderItemData } from "./models";
 
-export const headerLinks:HeaderItemData[]  = [
+export const homeHeaderLinks:HeaderItemData[]  = [
     {
         label: "About Me",
         link: "#about"
@@ -16,5 +16,24 @@ export const headerLinks:HeaderItemData[]  = [
     {
         label: "Contact Me",
         link: "#contact"
+    }
+]
+
+export const projectPageHeaderLinks:HeaderItemData[]  = [
+    {
+        label: "Mobile Apps",
+        link: "#mobileApps"
+    },
+    {
+        label: "Web Apps",
+        link: "#webApps"
+    },
+    {
+        label: "Packages",
+        link: "#packages"
+    },
+    {
+        label: "Experiments",
+        link: "#experiments"
     }
 ]
