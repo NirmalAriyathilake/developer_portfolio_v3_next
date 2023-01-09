@@ -7,8 +7,4 @@ module.exports = {
       "firebasestorage.googleapis.com",
     ],
   },
-   experimental: {
-    runtime: 'experimental-edge',
-  },
-  swcMinify: true
 };

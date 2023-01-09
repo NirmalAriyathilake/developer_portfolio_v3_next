@@ -28,10 +28,6 @@ import {
   ServicesSection,
 } from "../lib/sections";
 
-export const config = {
-  runtime: "experimental-edge",
-};
-
 const Home: NextPage<{
   introData: IntroSectionData;
   aboutData: AboutSectionData;
@@ -248,7 +244,6 @@ export const getServerSideProps: GetServerSideProps<{
 
   return {
     props: {
-      runtime: process.env.NEXT_RUNTIME,
       introData: introData,
       aboutData: aboutData,
       servicesData: servicesData,
