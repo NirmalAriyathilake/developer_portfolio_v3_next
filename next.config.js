@@ -5,4 +5,7 @@ module.exports = {
     domains: ["localhost", "firebasestorage.googleapis.com"],
   },
   swcMinify: true,
+  experimental: {
+    runtime: "experimental-edge",
+  },
 };

@@ -28,39 +28,8 @@ import {
   ServicesSection,
 } from "../lib/sections";
 
-const Home: NextPage<{
-  introData: IntroSectionData;
-  aboutData: AboutSectionData;
-  servicesData: ServiceData[];
-  projectsData: AppProjectData[];
-  contactsData: ContactData[];
-  downloadedAssets: [String, DownloadedAsset][];
-}> = (props) => {
-  return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center font-body">
-      <Head>
-        <title>Nirmal Code</title>
-        <link rel="icon" href="/favicon.png" />
-      </Head>
-
-      <main>
-        <HeaderSection
-          headerLinks={homeHeaderLinks}
-          downloadedAssets={new Map(props.downloadedAssets)}
-        />
-        <IntroSection data={props.introData} className="pt-24" />
-        <AboutSection data={props.aboutData} />
-        <ServicesSection data={props.servicesData} />
-        <ProjectsSection
-          data={props.projectsData}
-          downloadedAssets={new Map(props.downloadedAssets)}
-        />
-        <ContactSection data={props.contactsData} />
-      </main>
-
-      <FooterSection downloadedAssets={new Map(props.downloadedAssets)} />
-    </div>
-  );
+export const config = {
+  runtime: "experimental-edge",
 };
 
 export const getServerSideProps: GetServerSideProps<{
@@ -252,6 +221,41 @@ export const getServerSideProps: GetServerSideProps<{
       downloadedAssets: Array.from(downloadedAssets.entries()),
     },
   };
+};
+
+const Home: NextPage<{
+  introData: IntroSectionData;
+  aboutData: AboutSectionData;
+  servicesData: ServiceData[];
+  projectsData: AppProjectData[];
+  contactsData: ContactData[];
+  downloadedAssets: [String, DownloadedAsset][];
+}> = (props) => {
+  return (
+    <div className="min-h-screen w-full flex flex-col items-center justify-center font-body">
+      <Head>
+        <title>Nirmal Code</title>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+
+      <main>
+        <HeaderSection
+          headerLinks={homeHeaderLinks}
+          downloadedAssets={new Map(props.downloadedAssets)}
+        />
+        <IntroSection data={props.introData} className="pt-24" />
+        <AboutSection data={props.aboutData} />
+        <ServicesSection data={props.servicesData} />
+        <ProjectsSection
+          data={props.projectsData}
+          downloadedAssets={new Map(props.downloadedAssets)}
+        />
+        <ContactSection data={props.contactsData} />
+      </main>
+
+      <FooterSection downloadedAssets={new Map(props.downloadedAssets)} />
+    </div>
+  );
 };
 
 export default Home;
