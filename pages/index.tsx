@@ -29,7 +29,7 @@ import {
 } from "../lib/sections";
 
 export const config = {
-  runtime: "experimental-edge",
+  runtime: "edge",
 };
 
 export const getServerSideProps: GetServerSideProps<{

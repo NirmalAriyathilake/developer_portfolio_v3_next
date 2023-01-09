@@ -6,6 +6,6 @@ module.exports = {
   },
   swcMinify: true,
   experimental: {
-    runtime: "experimental-edge",
+    runtime: "edge",
   },
 };
