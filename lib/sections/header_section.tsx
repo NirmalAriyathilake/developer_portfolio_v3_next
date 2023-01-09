@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/future/image";
 import { useTheme } from "next-themes";
 
-import { HeaderItem } from "../components";
+import { AppLink, HeaderItem } from "../components";
 import { DownloadedAsset, HeaderItemData } from "../data/models";
 
 type Props = {
@@ -181,9 +180,9 @@ const HeaderSection = (props: Props) => {
         className={`flex items-center flex-wrap bg-base-300 p-3 fixed w-full top-0 left-0 right-0 z-50 ${props.className}`}
         id="HeaderSection"
       >
-        <Link href={"/"} className="inline-flex items-center p-2 mr-4 ">
+        <AppLink href={"/"} className="inline-flex items-center p-2 mr-4 ">
           {ThemedLogo()}
-        </Link>
+        </AppLink>
 
         {props.headerLinks.length > 0 ? (
           <div className="hidden lg:inline-flex lg:flex-grow lg:w-auto flex-row gap-10 text-lg text-primary font-semibold">

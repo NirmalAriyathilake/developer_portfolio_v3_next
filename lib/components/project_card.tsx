@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/future/image";
 import { useTheme } from "next-themes";
 
 import {
@@ -8,6 +7,8 @@ import {
   DownloadedAsset,
   ProjectLinkData,
 } from "../data/models";
+
+import { AppLink } from ".";
 
 type Props = {
   project: AppProjectData;
@@ -31,7 +32,7 @@ const ProjectCard = (props: Props) => {
     const suffix = currentTheme == "dark" ? "Dark" : "";
 
     return (
-      <Link
+      <AppLink
         className="shadow-lg"
         href={link.url}
         target="_blank"
@@ -44,7 +45,7 @@ const ProjectCard = (props: Props) => {
           blurDataURL={props.downloadedAssets.get(link.type + suffix)?.blurUrl}
           width={211}
         />
-      </Link>
+      </AppLink>
     );
   }
 

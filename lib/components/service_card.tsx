@@ -1,5 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/future/image";
+
+import { AppLink } from ".";
 
 type Props = {
   label: string;
@@ -27,12 +28,12 @@ const ServiceCard = (props: Props) => {
       <div className="px-5 py-5 flex flex-col items-center ">
         <div className="text-xl font-semibold mb-2 mt-20">{props.label}</div>
         <div className="text-base text-justify mt-2">{props.description}</div>
-        <Link
+        <AppLink
           className="text-lg text-right font-semibold self-end text-primary mt-5 hover:underline underline-offset-4 "
           href={props.seeMorePath}
         >
           See More
-        </Link>
+        </AppLink>
       </div>
     </div>
   );

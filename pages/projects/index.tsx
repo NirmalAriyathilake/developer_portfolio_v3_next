@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 
+import { AppLink } from "../../lib/components";
 import { DownloadedAsset} from "../../lib/data/models";
 // import { FooterSection } from "../../lib/sections";
 
@@ -19,9 +19,9 @@ const ProjectsPage: NextPage<{
         <p className="text-2xl text-primary font-semibold">
           PAGE UNDER MAINTENANCE
         </p>
-        <Link href={"/"} className="btn btn-link text-xl mt-10">
+        <AppLink href={"/"} className="btn btn-link text-xl mt-10">
           Go back Home
-        </Link>
+        </AppLink>
       </main>
 
       {/* <FooterSection /> */}

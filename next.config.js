@@ -2,9 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: [
-      "localhost",
-      "firebasestorage.googleapis.com",
-    ],
+    domains: ["localhost", "firebasestorage.googleapis.com"],
   },
+  swcMinify: true,
 };

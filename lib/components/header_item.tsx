@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink } from ".";
 
 type Props = {
   label: string;
@@ -8,12 +8,12 @@ type Props = {
 
 const HeaderItem = (props: Props) => {
   return (
-    <Link
+    <AppLink
       href={props.link}
       className={`btn btn-link no-underline hover:no-underline ${props.className}`}
     >
       {props.label}
-    </Link>
+    </AppLink>
   );
 };
 

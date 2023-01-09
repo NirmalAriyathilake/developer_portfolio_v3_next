@@ -1,7 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/future/image";
 
-import { SocialButton } from "../components";
+import { AppLink, SocialButton } from "../components";
 import { IntroSectionData } from "../data/models";
 
 type Props = {
@@ -32,21 +31,19 @@ const IntroSection = (props: Props) => {
         </h1>
 
         <div className="flex flex-row gap-5 mt-10">
-          <Link
+          <AppLink
             className="btn btn-outline btn-primary btn-lg"
             href={"#contact"}
           >
             Contact Me
-          </Link>
-          <Link
+          </AppLink>
+          <AppLink
             className="btn btn-primary btn-lg"
             href={props.data.cvdownload}
             target="_blank"
-            download
-            rel="noopener noreferrer"
           >
             Download CV
-          </Link>
+          </AppLink>
         </div>
 
         <div className="flex flex-row mt-10 items-center self-center gap-3">

@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
+
+import { AppLink } from "../lib/components";
 
 const PageNotFound: NextPage = (props) => {
   return (
@@ -15,9 +16,9 @@ const PageNotFound: NextPage = (props) => {
           <p className="font-bold mr-5">404</p> |{" "}
           <p className="ml-5">This page could not be found</p>
         </div>
-        <Link href={"/"} className="btn btn-link text-xl mt-10">
+        <AppLink href={"/"} className="btn btn-link text-xl mt-10">
           Go back Home
-        </Link>
+        </AppLink>
       </main>
     </div>
   );
