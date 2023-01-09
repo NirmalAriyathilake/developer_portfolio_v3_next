@@ -1,6 +1,4 @@
-import Link from "next/link";
-
-import { ProjectsContainer, SectionTitle } from "../components";
+import { AppLink, ProjectsContainer, SectionTitle } from "../components";
 import { AppProjectData, DownloadedAsset } from "../data/models";
 
 type Props = {
@@ -20,12 +18,12 @@ const ProjectsSection = (props: Props) => {
         data={props.data}
         downloadedAssets={props.downloadedAssets}
       />
-      <Link
+      <AppLink
         href={"projects"}
         className="btn btn-outline btn-primary btn-lg mt-14 "
       >
         MORE PROJECTS
-      </Link>
+      </AppLink>
     </div>
   );
 };

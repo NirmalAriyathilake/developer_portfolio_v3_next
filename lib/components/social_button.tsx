@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink } from ".";
 
 type Props = {
   label: string;
@@ -6,13 +6,13 @@ type Props = {
 };
 
 const SocialButton = (props: Props) => (
-  <Link
+  <AppLink
     className="btn btn-link no-underline hover:no-underline social-btn mb-5 "
     href={props.url}
     target="_blank"
   >
     {props.label}
-  </Link>
+  </AppLink>
 );
 
 export default SocialButton;

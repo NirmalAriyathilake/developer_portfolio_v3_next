@@ -1,4 +1,5 @@
 export { default as AboutInfoCard } from "./about_info_card";
+export { default as AppLink } from "./app_link";
 export { default as ContactCard } from "./contact_card";
 export { default as HeaderItem } from "./header_item";
 export { default as ProjectCard } from "./project_card";

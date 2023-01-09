@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/future/image";
 
 import { AboutInfoCard, SectionTitle } from "../components";
 import { AboutSectionData } from "../data/models";
