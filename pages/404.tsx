@@ -2,8 +2,6 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import FooterSection from "../lib/sections/footer_section";
-
 const PageNotFound: NextPage = (props) => {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center font-body">
@@ -21,8 +19,6 @@ const PageNotFound: NextPage = (props) => {
           Go back Home
         </Link>
       </main>
-
-      <FooterSection />
     </div>
   );
 };

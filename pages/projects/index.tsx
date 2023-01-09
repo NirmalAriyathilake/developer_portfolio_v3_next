@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 import { DownloadedAsset} from "../../lib/data/models";
-import { FooterSection } from "../../lib/sections";
+// import { FooterSection } from "../../lib/sections";
 
 const ProjectsPage: NextPage<{
   downloadedAssets: [String, DownloadedAsset][];
@@ -24,7 +24,7 @@ const ProjectsPage: NextPage<{
         </Link>
       </main>
 
-      <FooterSection />
+      {/* <FooterSection /> */}
     </div>
   );
 };
