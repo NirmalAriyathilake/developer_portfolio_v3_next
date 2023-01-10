@@ -28,10 +28,6 @@ import {
   ServicesSection,
 } from "../lib/sections";
 
-export const config = {
-  runtime: "edge",
-};
-
 export const getServerSideProps: GetServerSideProps<{
   introData: IntroSectionData;
   aboutData: AboutSectionData;
