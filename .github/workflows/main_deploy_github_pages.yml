@@ -33,9 +33,9 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |
-            echo "manager=pnpm" >> $GITHUB_OUTPUT
+            echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=i" >> $GITHUB_OUTPUT
-            echo "runner=pnpx --no-install" >> $GITHUB_OUTPUT
+            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
